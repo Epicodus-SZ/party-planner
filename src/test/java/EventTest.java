@@ -16,46 +16,61 @@ public class EventTest {
       assertEquals(100, testEvent.getGuestCount());
     }
 
-    @Test
-      public void setFood_isAbleToSetFoodOption_Pizza() {
-        Event testEvent = new Event("test");
-        testEvent.setFood("Pizza");
-        assertEquals("Pizza", testEvent.getFood());
-      }
+  @Test
+    public void setFood_isAbleToSetFoodOption_Pizza() {
+      Event testEvent = new Event("test");
+      testEvent.setFood("Pizza");
+      assertEquals("Pizza", testEvent.getFood());
+    }
 
-      @Test
-        public void coupon1IsValid_ReturnsFalsebyDefault_false() {
-          Event testEvent = new Event("test");
-          assertEquals(false, testEvent.coupon1IsValid());
-        }
+  @Test
+    public void coupon1IsValid_ReturnsFalsebyDefault_false() {
+      Event testEvent = new Event("test");
+      assertEquals(false, testEvent.coupon1IsValid());
+    }
 
-      @Test
-        public void coupon1IsValid_ReturnsFalseWhenGuestsButNoDinner_false() {
-          Event testEvent = new Event("test");
-          testEvent.setGuestCount(200);
-          assertEquals(false, testEvent.coupon1IsValid());
-        }
+  @Test
+    public void coupon1IsValid_ReturnsFalseWhenGuestsButNoDinner_false() {
+      Event testEvent = new Event("test");
+      testEvent.setGuestCount(200);
+      assertEquals(false, testEvent.coupon1IsValid());
+    }
 
-      @Test
-        public void coupon2IsValid_ReturnsFalseByDefault_false() {
-          Event testEvent = new Event("test");
-          assertEquals(false, testEvent.coupon2IsValid());
-        }
+  @Test
+    public void coupon1IsValid_ReturnsTrueWhenFullyMet_true() {
+      Event testEvent = new Event("test");
+      testEvent.setGuestCount(150);
+      testEvent.setFood("Pizza");
+      assertEquals(true, testEvent.coupon1IsValid());
+    }
 
-      @Test
-        public void coupon2IsValid_ReturnsTrueWhenMet_true() {
-          Event testEvent = new Event("test");
-          testEvent.setGuestCount(800);
-          testEvent.setFood("Pizza");
-          assertEquals(true, testEvent.coupon2IsValid());
-        }
+  @Test
+    public void setSubTotal_ReturnsFalseByDefault_false() {
+      Event testEvent = new Event("test");
+      assertEquals(false, testEvent.coupon2IsValid());
+    }
 
-      @Test
-        public void coupon1IsValid_ReturnsTrueWhenFullyMet_true() {
-          Event testEvent = new Event("test");
-          testEvent.setGuestCount(150);
-          testEvent.setFood("Pizza");
-          assertEquals(true, testEvent.coupon1IsValid());
-        }
+  @Test
+    public void setSubTotal_ReturnsTrueWhenFullyMet_true() {
+      Event testEvent = new Event("test");
+      testEvent.setGuestCount(800);
+      testEvent.setFood("Pizza");
+      assertEquals(true, testEvent.coupon2IsValid());
+    }
+
+  @Test
+    public void setSubTotal_SetsmDiscountTo0byDefault_0() {
+      Event testEvent = new Event("test");
+      assertEquals(String.valueOf(0.0), String.valueOf(testEvent.getDiscounts()));
+    }
+
+  @Test
+    public void setSubTotal_SetsmDiscountTo200WhenFullyMet_200() {
+      Event testEvent = new Event("test");
+      testEvent.setGuestCount(400);
+      testEvent.setBeverages("wine");
+      assertEquals(String.valueOf(200.0), String.valueOf(testEvent.getDiscounts()));
+    }
+
 
 }
