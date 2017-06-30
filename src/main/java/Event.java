@@ -6,8 +6,7 @@ public class Event {
   private String mFood; //what food is to be served
   private String mBeverages; //Beverage choice for event
   private String mEntertainment; //what entertainment was chosen for the event
-  private Boolean mCoupon1; //free DJ if Dinner + guests > 149
-  private Boolean mCoupon2; //$200 off events over $2000
+  private double mDiscounts; //any potential discounts
   public HashMap<String,Double> foodOptions = new HashMap<String,Double>();
   public HashMap<String,Double> beverageOptions = new HashMap<String,Double>();
 
@@ -16,6 +15,7 @@ public class Event {
     return mName;
   }
 
+  //free DJ if Dinner + guests > 149
   public Boolean coupon1IsValid(){
     if(!mFood.equals("none") && mGuestCount>149) {
       return true;
@@ -24,8 +24,14 @@ public class Event {
     }
   }
 
+  //$200 off events over $2000
   public Boolean coupon2IsValid(){
-    return mCoupon2;
+    if(getTotalPrice()>2000.00){
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   public int getGuestCount(){
@@ -45,10 +51,8 @@ public class Event {
   }
 
   public double getTotalPrice() {
-    double totalPrice = foodOptions.get(mFood)*mGuestCount;
-    if (coupon2IsValid()) {
-      totalPrice=totalPrice-200;
-    }
+    //determine total price
+    double totalPrice = (foodOptions.get(mFood)*mGuestCount)-mDiscounts;
     return totalPrice;
   }
 
@@ -58,6 +62,7 @@ public class Event {
     mGuestCount = 0;
     mBeverages = "none";
     mEntertainment = "none";
+    mDiscounts = 0;
 
     // Configure food options
     foodOptions.put("none", 0.00);

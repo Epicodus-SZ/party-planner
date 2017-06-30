@@ -13,16 +13,16 @@ public class App {
       System.out.println("Name:" + myEvent.getEventName());
       System.out.println("Guests:" + myEvent.getGuestCount());
       System.out.println("Food Option:" + myEvent.getFood());
-      System.out.println("Total Price:" + myEvent.getTotalPrice());
       System.out.println("Monthly Specials---");
-
       if(myEvent.coupon1IsValid()){
         System.out.println("cou1 yeah");
       }
       if(myEvent.coupon2IsValid()){
         System.out.println("cou2 yeah");
       }
-      System.out.println("\n\nSet Event options:\n[G] Set Guest Count\n[F] Set Food Option\n[B] Set Beverage\n[E] Set Entertainment\n[C] Apply Coupon\n[D] Get Event Details\n[X] Exit & Price");
+      System.out.println("Total Price:" + myEvent.getTotalPrice());
+
+      System.out.println("\n\nSet Event options:\n# of [G]uests\n[F]ood\n[B]everage\n[E]ntertainment\nGet Event [D]etails\nE[X]it");
       userInput = myConsole.readLine().toUpperCase();
 
       switch (userInput) {

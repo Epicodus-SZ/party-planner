@@ -37,10 +37,17 @@ public class EventTest {
         }
 
       @Test
-        public void coupon1IsValid_ReturnsFalseWhenDinnerButNotGuests_false() {
+        public void coupon2IsValid_ReturnsFalseByDefault_false() {
           Event testEvent = new Event("test");
-          testEvent.setGuestCount(130);
-          assertEquals(false, testEvent.coupon1IsValid());
+          assertEquals(false, testEvent.coupon2IsValid());
+        }
+
+      @Test
+        public void coupon2IsValid_ReturnsTrueWhenMet_true() {
+          Event testEvent = new Event("test");
+          testEvent.setGuestCount(800);
+          testEvent.setFood("Pizza");
+          assertEquals(true, testEvent.coupon2IsValid());
         }
 
       @Test
